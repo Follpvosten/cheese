@@ -8,3 +8,14 @@ Depends on default to be able to register cheese ores.
 
 ## Optional dependencies
 * petz: If petz is active, the default cheese item is the one from petz
+
+## Licenses
+The code in this repository is licensed under the BSD 2-Clause License
+(See the LICENSE file).
+
+The file `textures/cheese_cheese_lump.png` is licensed under the CC-BY-SA 4.0
+and was created by [Zughy](https://github.com/Zughy). Thanks!
+
+All other files in the textures folder are created by me and CC0 licensed. If
+anyone is crazy enough to want to use that \*beep\* for some reason, then please
+do so, but don't credit me.
