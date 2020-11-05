@@ -1,6 +1,7 @@
 local S = minetest.get_translator("cheese")
 local CHEESE_ORE_NAME = "cheese:stone_with_cheese"
 local CHEESE_BLOCK_NAME = "cheese:cheeseblock"
+local CHEESE_SWORD_NAME = "cheese:sword_cheese"
 
 -- The base cheese item used for everything in this mod
 -- Adapt to cheese from petz if applicable
@@ -17,6 +18,28 @@ else
 end
 
 
+-- Tools --
+minetest.register_tool(CHEESE_SWORD_NAME, {
+    description = S("Cheese Sword"),
+    inventory_image = "cheese_cheese_sword.png",
+    tool_capabilities = {
+        full_punch_interval = 0.7,
+        max_drop_level = 1,
+        groupcaps = {
+            snappy = {
+                -- I'm currently trying to understand what exactly this does. Halp.
+                times = { [1]=2.5, [2]=1.20, [3]=0.35 },
+                uses = 30,
+                maxlevel = 2,
+            },
+        },
+        damage_groups = { fleshy = 6 },
+    },
+    sound = { breaks = "default_tool_breaks" },
+    groups = { sword = 1 },
+})
+
+-- Nodes --
 -- Cheese ore - easy way to find cheese, at least that's what it's supposed to be.
 minetest.register_node(CHEESE_ORE_NAME, {
     description = S("Cheese Ore"),
@@ -73,12 +96,20 @@ minetest.register_craft({
         CHEESE_BLOCK_NAME,
     },
 })
+minetest.register_craft({
+    output = CHEESE_SWORD_NAME,
+    recipe = {
+        { cheese_item_name },
+        { cheese_item_name },
+        { "group:stick" },
+    }
+})
 
 minetest.register_ore({
     ore_type = "scatter",
     ore = CHEESE_ORE_NAME,
     wherein = "default:stone",
-    clust_scarcity = 6 * 6 * 6,
+    clust_scarcity = 7 * 7 * 7,
     clust_num_ores = 25,
     clust_size = 5,
     y_max = 256,
