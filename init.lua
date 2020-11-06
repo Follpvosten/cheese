@@ -3,6 +3,7 @@ local CHEESE_ORE_NAME = "cheese:stone_with_cheese"
 local CHEESE_BLOCK_NAME = "cheese:cheeseblock"
 local CHEESE_SWORD_NAME = "cheese:sword_cheese"
 local CHEESE_PICKAXE_NAME = "cheese:pick_cheese"
+local CHEESE_SHOVEL_NAME = "cheese:shovel_cheese"
 
 -- The base cheese item used for everything in this mod
 -- Adapt to cheese from petz if applicable
@@ -18,8 +19,9 @@ else
     })
 end
 
-
--- Tools --
+--
+-- Tools
+--
 minetest.register_tool(CHEESE_SWORD_NAME, {
     description = S("Cheese Sword"),
     inventory_image = "cheese_tool_cheesesword.png",
@@ -52,13 +54,36 @@ minetest.register_tool(CHEESE_PICKAXE_NAME, {
                 maxlevel = 2,
             },
         },
+        damage_groups = { fleshy = 3 },
     },
     sound = { breaks = "default_tool_breaks" },
     groups = { pickaxe = 1 },
 })
+minetest.register_tool(CHEESE_SHOVEL_NAME, {
+    description = S("Cheese Shovel"),
+    inventory_image = "cheese_tool_cheeseshovel.png",
+    wield_image = "cheese_tool_cheeseshovel.png^[transformR90",
+    tool_capabilities = {
+        full_punch_interval = 1.0,
+        max_drop_level = 1,
+        groupcaps = {
+            crumbly = {
+                times = { [1]=1.50, [2]=0.90, [3]=0.40 },
+                uses = 30,
+                maxlevel = 2,
+            },
+        },
+        damage_groups = { fleshy = 3 },
+    },
+    sound = { breaks = "default_tool_breaks" },
+    groups = { shovel = 1 },
+})
 
 
--- Nodes --
+--
+-- Nodes
+--
+
 -- Cheese ore - easy way to find cheese, at least that's what it's supposed to be.
 minetest.register_node(CHEESE_ORE_NAME, {
     description = S("Cheese Ore"),
@@ -85,7 +110,7 @@ minetest.register_node(CHEESE_ORE_NAME, {
         },
     },
 })
--- Cheese block - for storage and decoration
+-- Cheese block - for storage and decoration (and possibly portal?)
 minetest.register_node(CHEESE_BLOCK_NAME, {
     description = S("Cheese Block"),
     tiles = {
@@ -93,10 +118,14 @@ minetest.register_node(CHEESE_BLOCK_NAME, {
         "cheese_cheese_block_top_bottom.png",
         "cheese_cheese_block_sides.png",
     },
-    groups = { cracky = 1, oddly_breakable_by_hand = 1 },
+    groups = { cracky = 2, oddly_breakable_by_hand = 1 },
 })
 
--- Recipes --
+
+--
+-- Recipes
+--
+
 -- Block
 minetest.register_craft({
     type = "shapeless",
@@ -137,8 +166,18 @@ minetest.register_craft({
         { "", "group:stick", "" },
     }
 })
+minetest.register_craft({
+    output = CHEESE_SHOVEL_NAME,
+    recipe = {
+        { cheese_item_name },
+        { "group:stick" },
+        { "group:stick" },
+    }
+})
 
--- Ore --
+--
+-- Ore
+--
 minetest.register_ore({
     ore_type = "scatter",
     ore = CHEESE_ORE_NAME,
