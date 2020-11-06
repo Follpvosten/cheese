@@ -2,6 +2,7 @@ local S = minetest.get_translator("cheese")
 local CHEESE_ORE_NAME = "cheese:stone_with_cheese"
 local CHEESE_BLOCK_NAME = "cheese:cheeseblock"
 local CHEESE_SWORD_NAME = "cheese:sword_cheese"
+local CHEESE_PICKAXE_NAME = "cheese:pick_cheese"
 
 -- The base cheese item used for everything in this mod
 -- Adapt to cheese from petz if applicable
@@ -21,7 +22,7 @@ end
 -- Tools --
 minetest.register_tool(CHEESE_SWORD_NAME, {
     description = S("Cheese Sword"),
-    inventory_image = "cheese_cheese_sword.png",
+    inventory_image = "cheese_tool_cheesesword.png",
     tool_capabilities = {
         full_punch_interval = 0.7,
         max_drop_level = 1,
@@ -38,6 +39,24 @@ minetest.register_tool(CHEESE_SWORD_NAME, {
     sound = { breaks = "default_tool_breaks" },
     groups = { sword = 1 },
 })
+minetest.register_tool(CHEESE_PICKAXE_NAME, {
+    description = S("Cheese Pickaxe"),
+    inventory_image = "cheese_tool_cheesepick.png",
+    tool_capabilities = {
+        full_punch_interval = 0.9,
+        max_drop_level = 1,
+        groupcaps = {
+            cracky = {
+                times = { [1]=4.00, [2]=1.60, [3]=0.80 },
+                uses = 20,
+                maxlevel = 2,
+            },
+        },
+    },
+    sound = { breaks = "default_tool_breaks" },
+    groups = { pickaxe = 1 },
+})
+
 
 -- Nodes --
 -- Cheese ore - easy way to find cheese, at least that's what it's supposed to be.
@@ -77,7 +96,8 @@ minetest.register_node(CHEESE_BLOCK_NAME, {
     groups = { cracky = 1, oddly_breakable_by_hand = 1 },
 })
 
--- Recipes
+-- Recipes --
+-- Block
 minetest.register_craft({
     type = "shapeless",
     output = CHEESE_BLOCK_NAME,
@@ -100,6 +120,7 @@ minetest.register_craft({
         CHEESE_BLOCK_NAME,
     },
 })
+-- Tools
 minetest.register_craft({
     output = CHEESE_SWORD_NAME,
     recipe = {
@@ -108,7 +129,16 @@ minetest.register_craft({
         { "group:stick" },
     }
 })
+minetest.register_craft({
+    output = CHEESE_PICKAXE_NAME,
+    recipe = {
+        { cheese_item_name, cheese_item_name, cheese_item_name },
+        { "", "group:stick", "" },
+        { "", "group:stick", "" },
+    }
+})
 
+-- Ore --
 minetest.register_ore({
     ore_type = "scatter",
     ore = CHEESE_ORE_NAME,
