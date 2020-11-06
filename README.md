@@ -16,6 +16,5 @@ The code in this repository is licensed under the BSD 2-Clause License
 The file `textures/cheese_cheese_lump.png` is licensed under the CC-BY-SA 4.0
 and was created by [Zughy](https://github.com/Zughy). Thanks!
 
-All other files in the textures folder are created by me and CC0 licensed. If
-anyone is crazy enough to want to use that \*beep\* for some reason, then please
-do so, but don't credit me.
+All other files in the textures folder are derivatives of Zughy's cheese slice and
+created by me; since they're derivatives, they're also licensed CC BY-SA 4.0.

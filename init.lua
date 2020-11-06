@@ -69,7 +69,11 @@ minetest.register_node(CHEESE_ORE_NAME, {
 -- Cheese block - for storage and decoration
 minetest.register_node(CHEESE_BLOCK_NAME, {
     description = S("Cheese Block"),
-    tiles = { "cheese_cheese_block.png" },
+    tiles = {
+        "cheese_cheese_block_top_bottom.png",
+        "cheese_cheese_block_top_bottom.png",
+        "cheese_cheese_block_sides.png",
+    },
     groups = { cracky = 1, oddly_breakable_by_hand = 1 },
 })
 
