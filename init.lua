@@ -4,6 +4,7 @@ local CHEESE_BLOCK_NAME = "cheese:cheeseblock"
 local CHEESE_SWORD_NAME = "cheese:sword_cheese"
 local CHEESE_PICKAXE_NAME = "cheese:pick_cheese"
 local CHEESE_SHOVEL_NAME = "cheese:shovel_cheese"
+local CHEESE_AXE_NAME = "cheese:axe_cheese"
 
 -- The base cheese item used for everything in this mod
 -- Adapt to cheese from petz if applicable
@@ -77,6 +78,24 @@ minetest.register_tool(CHEESE_SHOVEL_NAME, {
     },
     sound = { breaks = "default_tool_breaks" },
     groups = { shovel = 1 },
+})
+minetest.register_tool(CHEESE_AXE_NAME, {
+    description = S("Cheese Axe"),
+    inventory_image = "cheese_tool_cheeseaxe.png",
+    tool_capabilities = {
+        full_punch_interval = 0.9,
+        max_drop_level = 1,
+        groupcaps = {
+            choppy = {
+                times = { [1]=2.50, [2]=1.40, [3]=1.00 },
+                uses = 20,
+                maxlevel = 2,
+            },
+        },
+        damage_groups = { fleshy = 4 },
+    },
+    sound = { breaks = "default_tool_breaks" },
+    groups = { axe = 1 },
 })
 
 
@@ -174,6 +193,15 @@ minetest.register_craft({
         { "group:stick" },
     }
 })
+minetest.register_craft({
+    output = CHEESE_AXE_NAME,
+    recipe = {
+        { cheese_item_name, cheese_item_name },
+        { cheese_item_name, "group:stick" },
+        { "",               "group:stick"},
+    }
+})
+
 
 --
 -- Ore
