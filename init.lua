@@ -5,18 +5,63 @@ local CHEESE_SWORD_NAME = "cheese:sword_cheese"
 local CHEESE_PICKAXE_NAME = "cheese:pick_cheese"
 local CHEESE_SHOVEL_NAME = "cheese:shovel_cheese"
 local CHEESE_AXE_NAME = "cheese:axe_cheese"
+local CHEESE_ITEM_NAME = "cheese:cheese_piece"
 
--- The base cheese item used for everything in this mod
--- Adapt to cheese from petz if applicable
-local cheese_item_name
+--
+-- Items
+--
+
+-- The cheese item used as the base for everything here.
+minetest.register_craftitem(CHEESE_ITEM_NAME, {
+    description = S("Cheese Piece"),
+    inventory_image = "cheese_cheese_lump.png",
+    on_use = minetest.item_eat(2),
+})
 if petz then
-    cheese_item_name = "petz:cheese"
-else
-    cheese_item_name = "cheese:cheese_lump"
-    minetest.register_craftitem(cheese_item_name, {
-        description = S("Cheese Lump"),
-        inventory_image = "cheese_cheese_lump.png",
-        on_use = minetest.item_eat(2),
+    -- Remove the cheese from petz
+    minetest.clear_craft({
+        output = "petz:blueberry_cheese_cake",
+    })
+    minetest.clear_craft({
+        output = "petz:cheese",
+    })
+    minetest.unregister_item("petz:cheese");
+    -- Re-add their recipes, but with our cheese
+    minetest.register_craft({
+        type = "cooking",
+        output = CHEESE_ITEM_NAME,
+        recipe = "petz:bucket_milk",
+        cooktime = 4,
+        replacements = {{ "group:food_milk", "bucket:bucket_empty"}},
+    })
+    minetest.register_craft({
+        type = "shapeless",
+        output = "petz:blueberry_cheese_cake",
+        recipe = {
+            "default:blueberries",
+            "farming:wheat",
+            CHEESE_ITEM_NAME,
+            "group:food_egg"
+        },
+    })
+end
+if minetest.get_modpath("mobs_animal") then
+    -- Remove their cheese
+    minetest.clear_craft({
+        output = "mobs:cheese",
+    })
+    minetest.clear_craft({
+        output = "mobs:cheeseblock",
+    })
+    minetest.unregister_item("mobs:cheeseblock");
+    minetest.unregister_item("mobs:cheese");
+    -- Make their milk produce our own cheese
+    minetest.register_craft({
+        type = "cooking",
+        output = CHEESE_ITEM_NAME,
+        recipe = "mobs:bucket_milk",
+        cooktime = 5,
+        replacements = {{ "mobs:bucket_milk", "bucket:bucket_empty"}}
     })
 end
 
@@ -112,18 +157,18 @@ minetest.register_node(CHEESE_ORE_NAME, {
         max_items = 4,
         items = {
             {
-                items = { cheese_item_name }
+                items = { CHEESE_ITEM_NAME }
             },
             {
-                items = { cheese_item_name },
+                items = { CHEESE_ITEM_NAME },
                 rarity = 2
             },
             {
-                items = { cheese_item_name },
+                items = { CHEESE_ITEM_NAME },
                 rarity = 3,
             },
             {
-                items = { cheese_item_name },
+                items = { CHEESE_ITEM_NAME },
                 rarity = 4,
             },
         },
@@ -150,20 +195,20 @@ minetest.register_craft({
     type = "shapeless",
     output = CHEESE_BLOCK_NAME,
     recipe = {
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
-        cheese_item_name,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
+        CHEESE_ITEM_NAME,
     },
 })
 minetest.register_craft({
     type = "shapeless",
-    output = cheese_item_name .. " 9",
+    output = CHEESE_ITEM_NAME .. " 9",
     recipe = {
         CHEESE_BLOCK_NAME,
     },
@@ -172,15 +217,15 @@ minetest.register_craft({
 minetest.register_craft({
     output = CHEESE_SWORD_NAME,
     recipe = {
-        { cheese_item_name },
-        { cheese_item_name },
+        { CHEESE_ITEM_NAME },
+        { CHEESE_ITEM_NAME },
         { "group:stick" },
     }
 })
 minetest.register_craft({
     output = CHEESE_PICKAXE_NAME,
     recipe = {
-        { cheese_item_name, cheese_item_name, cheese_item_name },
+        { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
         { "", "group:stick", "" },
         { "", "group:stick", "" },
     }
@@ -188,7 +233,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = CHEESE_SHOVEL_NAME,
     recipe = {
-        { cheese_item_name },
+        { CHEESE_ITEM_NAME },
         { "group:stick" },
         { "group:stick" },
     }
@@ -196,8 +241,8 @@ minetest.register_craft({
 minetest.register_craft({
     output = CHEESE_AXE_NAME,
     recipe = {
-        { cheese_item_name, cheese_item_name },
-        { cheese_item_name, "group:stick" },
+        { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
+        { CHEESE_ITEM_NAME, "group:stick" },
         { "",               "group:stick"},
     }
 })
