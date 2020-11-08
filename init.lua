@@ -1,11 +1,14 @@
 local S = minetest.get_translator("cheese")
+-- Base item
+local CHEESE_ITEM_NAME = "cheese:cheese_piece"
+-- Nodes
 local CHEESE_ORE_NAME = "cheese:stone_with_cheese"
 local CHEESE_BLOCK_NAME = "cheese:cheeseblock"
+-- Tools
 local CHEESE_SWORD_NAME = "cheese:sword_cheese"
 local CHEESE_PICKAXE_NAME = "cheese:pick_cheese"
 local CHEESE_SHOVEL_NAME = "cheese:shovel_cheese"
 local CHEESE_AXE_NAME = "cheese:axe_cheese"
-local CHEESE_ITEM_NAME = "cheese:cheese_piece"
 
 --
 -- Items
@@ -14,55 +17,15 @@ local CHEESE_ITEM_NAME = "cheese:cheese_piece"
 -- The cheese item used as the base for everything here.
 minetest.register_craftitem(CHEESE_ITEM_NAME, {
     description = S("Cheese Piece"),
-    inventory_image = "cheese_cheese_lump.png",
+    inventory_image = "cheese_cheese_piece.png",
     on_use = minetest.item_eat(2),
 })
-if petz then
-    -- Remove the cheese from petz
-    minetest.clear_craft({
-        output = "petz:blueberry_cheese_cake",
-    })
-    minetest.clear_craft({
-        output = "petz:cheese",
-    })
-    minetest.unregister_item("petz:cheese");
-    -- Re-add their recipes, but with our cheese
-    minetest.register_craft({
-        type = "cooking",
-        output = CHEESE_ITEM_NAME,
-        recipe = "petz:bucket_milk",
-        cooktime = 4,
-        replacements = {{ "group:food_milk", "bucket:bucket_empty"}},
-    })
-    minetest.register_craft({
-        type = "shapeless",
-        output = "petz:blueberry_cheese_cake",
-        recipe = {
-            "default:blueberries",
-            "farming:wheat",
-            CHEESE_ITEM_NAME,
-            "group:food_egg"
-        },
-    })
+-- Aliases
+if minetest.get_modpath("petz") then
+    minetest.register_alias_force("petz:cheese", CHEESE_ITEM_NAME)
 end
 if minetest.get_modpath("mobs_animal") then
-    -- Remove their cheese
-    minetest.clear_craft({
-        output = "mobs:cheese",
-    })
-    minetest.clear_craft({
-        output = "mobs:cheeseblock",
-    })
-    minetest.unregister_item("mobs:cheeseblock");
-    minetest.unregister_item("mobs:cheese");
-    -- Make their milk produce our own cheese
-    minetest.register_craft({
-        type = "cooking",
-        output = CHEESE_ITEM_NAME,
-        recipe = "mobs:bucket_milk",
-        cooktime = 5,
-        replacements = {{ "mobs:bucket_milk", "bucket:bucket_empty"}}
-    })
+    minetest.register_alias_force("mobs:cheese", CHEESE_ITEM_NAME)
 end
 
 --

@@ -8,8 +8,7 @@ some cheese to regain health.
 Depends on default to be able to register cheese ores.
 
 ## Optional dependencies
-* petz: If petz is active, the cheese item from petz will be replaced by the one from cheese.
-* mobs_animal: Same as above.
+* petz, mobs_animal: If available, item aliases will be added to integrate
 
 ## Licenses
 The code in this repository is licensed under the BSD 2-Clause License
