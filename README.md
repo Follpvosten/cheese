@@ -9,6 +9,7 @@ Depends on default to be able to register cheese ores.
 
 ## Optional dependencies
 * petz, mobs_animal: If available, item aliases will be added to integrate
+* 3d_armor: If enabled, cheese armor will be added
 
 ## Licenses
 The code in this repository is licensed under the BSD 2-Clause License

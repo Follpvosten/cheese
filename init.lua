@@ -105,6 +105,103 @@ minetest.register_tool(CHEESE_AXE_NAME, {
     sound = { breaks = "default_tool_breaks" },
     groups = { axe = 1 },
 })
+if minetest.get_modpath("3d_armor") then
+    -- Register armor
+    -- Boots
+    local CHEESE_BOOTS_NAME = "cheese:boots_cheese";
+    armor:register_armor(CHEESE_BOOTS_NAME, {
+        description = S("Cheese Boots"),
+        inventory_image = "cheese_armor_boots_inv.png",
+        texture = "cheese_armor_boots.png",
+        preview = "cheese_armor_boots_preview.png",
+        groups = {
+            armor_feet = 1,
+            armor_heal = 0,
+            armor_use = 800,
+        },
+        armor_groups = { fleshy = 10 },
+        damage_groups = { cracky=2, snappy=3, choppy=2, crumbly=1, level=2 },
+    })
+    minetest.register_craft({
+        output = CHEESE_BOOTS_NAME,
+        recipe = {
+            { CHEESE_ITEM_NAME, "", CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, "", CHEESE_ITEM_NAME },
+        }
+    })
+    minetest.register_alias("cheeseboots", CHEESE_BOOTS_NAME)
+    -- Chestplate
+    local CHEESE_CHESTPLATE_NAME = "cheese:chestplate_cheese"
+    armor:register_armor(CHEESE_CHESTPLATE_NAME, {
+        description = S("Cheese Chestplate"),
+        inventory_image = "cheese_armor_chestplate_inv.png",
+        texture = "cheese_armor_chestplate.png",
+        preview = "cheese_armor_chestplate_preview.png",
+        groups = {
+            armor_torso = 1,
+            armor_heal = 0,
+            armor_use = 800,
+        },
+        armor_groups = { fleshy = 15 },
+        damage_groups = { cracky=2, snappy=3, choppy=2, crumbly=1, level=2 },
+    })
+    minetest.register_craft({
+        output = CHEESE_CHESTPLATE_NAME,
+        recipe = {
+            { CHEESE_ITEM_NAME, "",               CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
+        }
+    })
+    minetest.register_alias("cheesechestplate", CHEESE_CHESTPLATE_NAME)
+    -- Helmet
+    local CHEESE_HELMET_NAME = "cheese:helmet_cheese";
+    armor:register_armor(CHEESE_HELMET_NAME, {
+        description = S("Cheese Helmet"),
+        inventory_image = "cheese_armor_helmet_inv.png",
+        texture = "cheese_armor_helmet.png",
+        preview = "cheese_armor_helmet_preview.png",
+        groups = {
+            armor_head = 1,
+            armor_heal = 0,
+            armor_use = 800,
+        },
+        armor_groups = { fleshy = 15 },
+        damage_groups = { cracky=2, snappy=3, choppy=2, crumbly=1, level=2 },
+    })
+    minetest.register_craft({
+        output = CHEESE_HELMET_NAME,
+        recipe = {
+            { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, "",               CHEESE_ITEM_NAME },
+        }
+    })
+    minetest.register_alias("cheesehelmet", CHEESE_HELMET_NAME)
+    -- Leggings
+    local CHEESE_LEGGINGS_NAME = "cheese:leggings_cheese"
+    armor:register_armor(CHEESE_LEGGINGS_NAME, {
+        description = S("Cheese Leggings"),
+        inventory_image = "cheese_armor_leggings_inv.png",
+        texture = "cheese_armor_leggings.png",
+        preview = "cheese_armor_leggings_preview.png",
+        groups = {
+            armor_legs = 1,
+            armor_heal = 0,
+            armor_use = 800,
+        },
+        armor_groups = { fleshy = 15 },
+        damage_groups = { cracky=2, snappy=3, choppy=2, crumbly=1, level=2 },
+    })
+    minetest.register_craft({
+        output = CHEESE_LEGGINGS_NAME,
+        recipe = {
+            { CHEESE_ITEM_NAME, CHEESE_ITEM_NAME, CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, "",               CHEESE_ITEM_NAME },
+            { CHEESE_ITEM_NAME, "",               CHEESE_ITEM_NAME },
+        }
+    })
+    minetest.register_alias("cheeseleggings", CHEESE_LEGGINGS_NAME)
+end
 
 
 --
