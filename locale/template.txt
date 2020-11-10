@@ -1,0 +1,17 @@
+# textdomain: cheese
+
+Cheese Piece=
+Cheese Sword=
+Cheese Pickaxe=
+Cheese Shovel=
+Cheese Axe=
+
+# nodes
+Cheese Ore=
+Cheese Block=
+
+# 3d_armor
+Cheese Boots=
+Cheese Chestplate=
+Cheese Helmet=
+Cheese Leggings=

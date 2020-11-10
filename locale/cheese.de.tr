@@ -1,0 +1,17 @@
+# textdomain: cheese
+
+Cheese Piece=Stück Käse
+Cheese Sword=Käseschwert
+Cheese Pickaxe=Käsespitzhacke
+Cheese Shovel=Käseschaufel
+Cheese Axe=Käseaxt
+
+# nodes
+Cheese Ore=Käseerz
+Cheese Block=Käseblock
+
+# 3d_armor
+Cheese Boots=Käsestiefel
+Cheese Chestplate=Käse-Brustplatte
+Cheese Helmet=Käsehelm
+Cheese Leggings=Käsehosen
